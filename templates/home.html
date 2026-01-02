@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <div class="background-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+    </div>
+
+    <div class="container" data-aos="fade-up" data-aos-duration="1000">
+        <header>
+            <h1>Student Score Predictor</h1>
+            <p>Enter details to estimate performance metrics</p>
+        </header>
+
+        <form action="{{ url_for('predict_datapoint')}}" method="POST" class="glass-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select name="gender" required>
+                        <option value="" selected disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Race/Ethnicity</label>
+                    <select name="ethnicity" required>
+                        <option value="" selected disabled>Select Group</option>
+                        <option value="group A">Group A</option>
+                        <option value="group B">Group B</option>
+                        <option value="group C">Group C</option>
+                        <option value="group D">Group D</option>
+                        <option value="group E">Group E</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Parental Level of Education</label>
+                    <select name="parental_level_of_education" required>
+                        <option value="" selected disabled>Select Education</option>
+                        <option value="associate's degree">Associate's Degree</option>
+                        <option value="bachelor's degree">Bachelor's Degree</option>
+                        <option value="high school">High School</option>
+                        <option value="master's degree">Master's Degree</option>
+                        <option value="some college">Some College</option>
+                        <option value="some high school">Some High School</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Lunch Type</label>
+                    <select name="lunch" required>
+                        <option value="" selected disabled>Select Lunch</option>
+                        <option value="standard">Standard</option>
+                        <option value="free/reduced">Free/Reduced</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Test Preparation Course</label>
+                    <select name="test_preparation_course" required>
+                        <option value="" selected disabled>Status</option>
+                        <option value="none">None</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Reading Score (0-100)</label>
+                    <input type="number" name="reading_score" placeholder="Score" min="0" max="100" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Writing Score (0-100)</label>
+                    <input type="number" name="writing_score" placeholder="Score" min="0" max="100" required>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Predict Math Score</button>
+        </form>
+
+        {% if results %}
+        <div class="result-box" data-aos="zoom-in">
+            <h3>Predicted Score: <span>{{results}}</span></h3>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
